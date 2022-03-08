@@ -305,6 +305,14 @@ data "aws_iam_policy_document" "role_policy_devops_role" {
     ]
     resources = ["*"]
   }
+  statement {
+    sid = "AllowCloudFormationActions"
+    effect = "Allow"
+    actions = [
+      "cloudformation:*"
+    ]
+    resources = ["*"]
+  }
 }
 
 data "aws_iam_policy_document" "role_policy_ecs_task_role" {

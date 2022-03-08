@@ -15,7 +15,7 @@ phases:
       # - npx yarn build
   build:
     commands:
-      - serverless deploy --stage $STAGE --force --verbose
+      - serverless deploy --stage $STAGE --aws-region $AWS_REGION --force --verbose
   post_build:
     commands:
       - echo Build completed on `date`
