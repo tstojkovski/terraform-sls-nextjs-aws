@@ -33,14 +33,14 @@ variable "port_app_client" {
   default     = 80
 }
 
-variable "client_buildspec_path" {
+variable "buildspec_path_client" {
   description = "The location of the client buildspec file"
   type        = string
   default     = "./infrastructure/dev/buildspec_client.yml"
 }
 
 
-variable "backend_buildspec_path" {
+variable "buildspec_path_backend" {
   description = "The location of the backend buildspec file"
   type        = string
   default     = "./infrastructure/dev/buildspec_backend.yml"
@@ -50,6 +50,12 @@ variable "folder_path_client" {
   description = "The location of the client files"
   type        = string
   default     = "./frontend/."
+}
+
+variable "folder_path_backend" {
+  description = "The location of the backend files"
+  type        = string
+  default     = "./backend/."
 }
 
 variable "container_name" {

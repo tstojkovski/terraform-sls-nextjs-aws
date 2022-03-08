@@ -237,7 +237,9 @@ module "codebuild_backend" {
   iam_role               = module.devops_role.arn_role
   region                 = var.aws_region
   account_id             = data.aws_caller_identity.id_current_account.account_id
-  buildspec_path         = var.backend_buildspec_path
+  buildspec_path         = var.buildspec_path_backend
+  folder_path            = var.folder_path_backend
+  environment_name       = var.environment_name
 }
 
 
@@ -250,7 +252,7 @@ module "codebuild_client" {
   account_id             = data.aws_caller_identity.id_current_account.account_id
   ecr_repo_url           = module.ecr_client.ecr_repository_url
   folder_path            = var.folder_path_client
-  buildspec_path         = var.client_buildspec_path
+  buildspec_path         = var.buildspec_path_client
   task_definition_family = module.ecs_taks_definition_client.task_definition_family
   container_name         = var.container_name["client"]
   service_port           = var.port_app_client

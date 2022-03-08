@@ -35,6 +35,16 @@ resource "aws_codebuild_project" "aws_codebuild" {
       name  = "IMAGE_TAG"
       value = "latest"
     }
+
+    environment_variable {
+      name  = "FOLDER_PATH"
+      value = var.folder_path
+    }
+
+    environment_variable {
+      name  = "STAGE"
+      value = var.environment_name
+    }
   }
 
   logs_config {

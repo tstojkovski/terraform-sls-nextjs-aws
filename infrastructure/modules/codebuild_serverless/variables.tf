@@ -23,3 +23,13 @@ variable "buildspec_path" {
   description = "Path to for the Buildspec file"
   type        = string
 }
+
+variable "folder_path" {
+  description = "Folder path to use to run the sls command"
+  type        = string
+}
+
+variable "environment_name" {
+  description = "The environment name"
+  type        = string
+}

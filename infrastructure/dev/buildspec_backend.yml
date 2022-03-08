@@ -8,6 +8,7 @@ phases:
       - npx yarn
   pre_build:
     commands:
+      - cd $FOLDER_PATH
       - rm -rf ./build
       - npx yarn build
   build:
@@ -15,4 +16,5 @@ phases:
       - npx yarn sls deploy --stage $STAGE --force --verbose
   post_build:
     commands:
-      - if [ "$CODEBUILD_BUILD_SUCCEEDING" -eq 1 ]; then npx yarn postdeploy:$STAGE; else npx yarn postdeploy:failed:$STAGE; fi
+      - echo Build completed on `date`
+      # - if [ "$CODEBUILD_BUILD_SUCCEEDING" -eq 1 ]; then npx yarn postdeploy:$STAGE; else npx yarn postdeploy:failed:$STAGE; fi
