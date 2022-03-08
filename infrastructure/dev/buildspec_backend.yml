@@ -8,9 +8,9 @@ phases:
       - npx yarn
   pre_build:
     commands:
-      - cd $FOLDER_PATH
-      - rm -rf ./build
-      - npx yarn build
+      - cd $FOLDER_PATH # do nothing here for now
+      # - rm -rf ./build
+      # - npx yarn build
   build:
     commands:
       - npx yarn sls deploy --stage $STAGE --force --verbose
