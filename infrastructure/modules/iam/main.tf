@@ -280,10 +280,11 @@ data "aws_iam_policy_document" "role_policy_devops_role" {
     resources = ["*"]
   }
   statement {
-    sid    = "AllowIAMPassRole"
+    sid    = "AllowIAMActions"
     effect = "Allow"
     actions = [
-      "iam:PassRole"
+      "iam:PassRole",
+      "iam:GetRole"
     ]
     resources = ["*"]
   }
