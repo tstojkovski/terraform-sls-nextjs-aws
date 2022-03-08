@@ -260,19 +260,25 @@ module "codedeploy_client" {
   codedeploy_role = module.codedeploy_role.arn_role_codedeploy
 }
 
+# ------- Creating CodeStar connection -------
+resource "aws_codestarconnections_connection" "pipeline" {
+  name          = "codestar-gh"
+  provider_type = "GitHub"
+}
+
 # ------- Creating CodePipeline -------
 module "codepipeline" {
   source                    = "../modules/codepipeline"
   name                      = "pipeline-${var.environment_name}"
   pipe_role                 = module.devops_role.arn_role
   s3_bucket                 = module.s3_codepipeline.s3_bucket_id
-  github_token              = var.github_token
   repo_owner                = var.repository_owner
   repo_name                 = var.repository_name
   branch                    = var.repository_branch
   codebuild_project_client  = module.codebuild_client.project_id
   app_name_client           = module.codedeploy_client.application_name
   deployment_group_client   = module.codedeploy_client.deployment_group_name
+  codestar_connection       = aws_codestarconnections_connection.pipeline.arn
 
   depends_on = [module.policy_devops_role]
 }
@@ -284,12 +290,12 @@ module "codepipeline_serverless" {
   name                      = "pipeline-sls-${var.environment_name}"
   pipe_role                 = module.devops_role.arn_role
   s3_bucket                 = module.s3_codepipeline.s3_bucket_id
-  github_token              = var.github_token
   repo_owner                = var.repository_owner
   repo_name                 = var.repository_name
   branch                    = var.repository_branch
   app_name_backend          = "backend-sls-${var.environment_name}"
   environment_name          = var.environment_name
+  codestar_connection       = aws_codestarconnections_connection.pipeline.arn
 
   depends_on = [module.policy_devops_role]
 }
