@@ -50,7 +50,7 @@ resource "aws_codepipeline" "aws_codepipeline_serverless" {
       output_artifacts = ["BuildArtifact_backend"]
 
       configuration = {
-        ProjectName          = var.app_name_backend
+        ProjectName          = var.codebuild_project_backend
         EnvironmentVariables = jsonencode(
           [
             {

@@ -31,8 +31,8 @@ variable "branch" {
   type        = string
 }
 
-variable "app_name_backend" {
-  description = "CodeDeploy Application name for the server"
+variable "codebuild_project_backend" {
+  description = "CodeBuild project name"
   type        = string
 }
 

@@ -304,7 +304,7 @@ module "codepipeline_serverless" {
   repo_owner                = var.repository_owner
   repo_name                 = var.repository_name
   branch                    = var.repository_branch
-  app_name_backend          = "backend-sls-${var.environment_name}"
+  codebuild_project_backend = module.codebuild_backend.project_id
   environment_name          = var.environment_name
   codestar_connection       = aws_codestarconnections_connection.pipeline.arn
 
