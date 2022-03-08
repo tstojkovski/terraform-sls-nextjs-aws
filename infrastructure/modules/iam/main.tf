@@ -301,6 +301,14 @@ data "aws_iam_policy_document" "role_policy_devops_role" {
     ]
     resources = ["*"]
   }
+  statement {
+    sid = "AllowCodeStarConnections"
+    effect = "Allow"
+    actions = [
+      "codestar-connections:*"
+    ]
+    resources = ["*"]
+  }
 }
 
 data "aws_iam_policy_document" "role_policy_ecs_task_role" {
@@ -333,13 +341,5 @@ data "aws_iam_policy_document" "role_policy_ecs_task_role" {
       "dynamodb:Scan",
     ]
     resources = var.dynamodb_table
-  }
-  statement {
-    sid = "AllowCodeStarConnections"
-    effect = "Allow"
-    actions = [
-      "codestar-connections:*"
-    ]
-    resources = ["*"]
   }
 }
