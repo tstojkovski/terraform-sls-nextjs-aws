@@ -220,7 +220,7 @@ module "policy_devops_role" {
   attach_to             = module.devops_role.name_role
   create_devops_policy  = true
   ecr_repositories      = [module.ecr_client.ecr_repository_arn]
-  code_build_projects   = [module.codebuild_client.project_arn]
+  code_build_projects   = [module.codebuild_client.project_arn, module.codebuild_backend.project_arn]
   code_deploy_resources = [module.codedeploy_client.application_arn, module.codedeploy_client.deployment_group_arn]
 }
 
