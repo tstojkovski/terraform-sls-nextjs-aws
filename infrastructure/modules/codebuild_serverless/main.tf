@@ -49,8 +49,8 @@ resource "aws_codebuild_project" "aws_codebuild" {
 
   logs_config {
     cloudwatch_logs {
-      group_name  = "log-group"
-      stream_name = "log-stream"
+      group_name  = "log-group-sls"
+      stream_name = "log-stream-sls"
     }
   }
 
