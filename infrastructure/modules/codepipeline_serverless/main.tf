@@ -23,7 +23,7 @@ resource "aws_codepipeline" "aws_codepipeline_serverless" {
         "BranchName"           = var.branch
         "ConnectionArn"        = var.codestar_connection
         "FullRepositoryId"     = "${var.repo_owner}/${var.repo_name}"
-        "OutputArtifactFormat" = "CODE_ZIP"
+        "OutputArtifactFormat" = "CODEBUILD_CLONE_REF"
       }
       input_artifacts  = []
       name             = "Source"
