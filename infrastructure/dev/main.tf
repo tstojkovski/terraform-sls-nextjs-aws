@@ -230,6 +230,17 @@ module "sns" {
   sns_name = "sns-${var.environment_name}"
 }
 
+# ------- Creating the backend CodeBuild project -------
+module "codebuild_backend" {
+  source                 = "../modules/codebuild_serverless"
+  name                   = "codebuild-${var.environment_name}-backend"
+  iam_role               = module.devops_role.arn_role
+  region                 = var.aws_region
+  account_id             = data.aws_caller_identity.id_current_account.account_id
+  buildspec_path         = var.backend_buildspec_path
+}
+
+
 # ------- Creating the client CodeBuild project -------
 module "codebuild_client" {
   source                 = "../modules/codebuild"
@@ -239,7 +250,7 @@ module "codebuild_client" {
   account_id             = data.aws_caller_identity.id_current_account.account_id
   ecr_repo_url           = module.ecr_client.ecr_repository_url
   folder_path            = var.folder_path_client
-  buildspec_path         = var.buildspec_path
+  buildspec_path         = var.client_buildspec_path
   task_definition_family = module.ecs_taks_definition_client.task_definition_family
   container_name         = var.container_name["client"]
   service_port           = var.port_app_client
