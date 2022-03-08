@@ -284,7 +284,10 @@ data "aws_iam_policy_document" "role_policy_devops_role" {
     effect = "Allow"
     actions = [
       "iam:PassRole",
-      "iam:GetRole"
+      "iam:GetRole",
+      "iam:CreateRole",
+      "iam:DeleteRole",
+      "iam:PutRolePolicy"
     ]
     resources = ["*"]
   }
@@ -293,7 +296,9 @@ data "aws_iam_policy_document" "role_policy_devops_role" {
     effect = "Allow"
     actions = [
       "logs:CreateLogGroup",
+      "logs:DeleteLogGroup",
       "logs:CreateLogStream",
+      "logs:DeleteLogStream",
       "logs:PutLogEvents"
     ]
     resources = ["*"]
@@ -319,6 +324,14 @@ data "aws_iam_policy_document" "role_policy_devops_role" {
     effect = "Allow"
     actions = [
       "apigateway:*"
+    ]
+    resources = ["*"]
+  }
+  statement {
+    sid = "AllowLambdaActions"
+    effect = "Allow"
+    actions = [
+      "lambda:*"
     ]
     resources = ["*"]
   }
